@@ -8,7 +8,7 @@ class StringUtilsTest {
 
         String result1 = StringUtils.repeat("hola",3);
         String expected1 = "holaholahola";
-        //assertEquals1(result1, expected1);// assert manual
+        //assertEquals1(result1, expected1);// assert manual con exception
 
         String result2 = StringUtils.repeat("mundo",2);
         String expected2 = "mundomundo";
