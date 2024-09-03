@@ -1,4 +1,4 @@
-package com.platzi.payments.library_mock;
+package com.platzi.payments.library_simulation;
 
 public class PaymentResponse {
 

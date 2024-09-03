@@ -1,7 +1,7 @@
 package com.platzi.payments;
 
-import com.platzi.payments.library_mock.PaymentRequest;
-import com.platzi.payments.library_mock.PaymentResponse;
+import com.platzi.payments.library_simulation.PaymentRequest;
+import com.platzi.payments.library_simulation.PaymentResponse;
 
 public class PaymentProcessor {
 
