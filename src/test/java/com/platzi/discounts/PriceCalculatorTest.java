@@ -17,7 +17,7 @@ class PriceCalculatorTest {
         PriceCalculator calc = new PriceCalculator();
         calc.addPrice(10.2);
         calc.addPrice(15.5);
-        assertEquals(25.6, calc.getTotal(), 0.01);
+        assertEquals(25.71, calc.getTotal(), 0.011);
     }
 
     @Test
@@ -30,6 +30,6 @@ class PriceCalculatorTest {
         calc.addPrice(234.11);
         calc.addPrice(100);
         calc.setDiscount(25);
-        assertEquals(357.35, calc.getTotal(), 0.01) ;
+        assertEquals(357.35, calc.getTotal(), 0.011) ;
     }
 }

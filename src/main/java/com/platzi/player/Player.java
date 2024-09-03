@@ -12,6 +12,6 @@ public class Player {
 
     public boolean play() {
         int diceNumber = dice.roll();
-        return diceNumber > minNumberToWin;
+        return diceNumber >= minNumberToWin;
     }
 }
