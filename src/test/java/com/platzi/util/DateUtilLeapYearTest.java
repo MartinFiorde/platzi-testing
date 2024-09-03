@@ -42,7 +42,8 @@ class DateUtilLeapYearTest {
     }
 
     @Test
-    void should_return_true_when_in_list() {
+    void should_return_true_when_in_list_of_reference() {
+        // Reference: https://en.wikipedia.org/wiki/Category:Leap_years_in_the_Gregorian_calendar as of 3-Sep-2024
         int[] years = {1584, 1588, 1592, 1596, 1600, 1604, 1608, 1612, 1616, 1620, 1624, 1628,
                 1632, 1636, 1640, 1644, 1648, 1652, 1656, 1660, 1664, 1668, 1672, 1676, 1680, 1684,
                 1688, 1692, 1696, 1704, 1708, 1712, 1716, 1720, 1724, 1728, 1732, 1736, 1740, 1744,
