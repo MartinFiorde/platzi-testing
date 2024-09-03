@@ -6,40 +6,18 @@ public class RomanNumeralUtil {
     }
 
     private static final String[] romanNumber = {
-            "M",    //1000
-            "CM",   // 900
-            "D",    // 500
-            "CD",   // 400
-            "C",    // 100
-            "XC",   //  90
-            "L",    //  50
-            "XL",   //  40
-            "X",    //  10
-            "IX",   //   9
-            "V",    //   5
-            "IV",   //   4
-            "I"};   //   1
-
+            "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
     private static final int[] arabicValues = {
-            1000,   // M
-            900,    // CM
-            500,    // D
-            400,    // CD
-            100,    // C > M
-            90,     // XC
-            50,     // L > D
-            40,     // XL
-            10,     // X > C
-            9,      // IX
-            5,      // V > L
-            4,      // IV
-            1};     // I > X
+            1000, 900, 500,  400, 100,   90,  50,   40,  10,    9,   5,    4,   1};
 
-
+    /**
+     * @param n the Arabic number to convert (1 <= n <= 3999)
+     * @return the Roman numeral as a String
+     * @throws IllegalArgumentException if the number is outside the valid range
+     */
     public static String arabicToRoman(int n) {
-        if (n < 0) return "-0";
-        if (n == 0) return "0";
-        if (n > 3999) return "M+";
+        validateArabicNumber(n);
+
         int index = 0;
         StringBuilder sb = new StringBuilder();
         while (n > 0) {
@@ -51,5 +29,14 @@ public class RomanNumeralUtil {
             }
         }
         return sb.toString();
+    }
+
+    private static void validateArabicNumber(int n) {
+        if (n <= 0) {
+            throw new IllegalArgumentException("Number must be positive and greater than zero.");
+        }
+        if (n > 3999) {
+            throw new IllegalArgumentException("Number must be less than or equal to 3999.");
+        }
     }
 }

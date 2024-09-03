@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class RomanNumeralUtilTest {
 
     @Test
-    void return_roman_numeral_for_range_to_100() {
+    void return_roman_numeral_from_1_to_100() {
         List<String> expected = Arrays.asList(
                 "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
                 "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
@@ -24,13 +24,15 @@ class RomanNumeralUtilTest {
                 "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"
         );
         for (int i = 0; i < expected.size(); i++) {
-            assertEquals(expected.get(i), RomanNumeralUtil.arabicToRoman(i + 1));
-            System.out.println((i + 1) + ": " + RomanNumeralUtil.arabicToRoman(i + 1));
+            int arabicValue = i + 1;
+            String result = RomanNumeralUtil.arabicToRoman(arabicValue);
+            assertEquals(expected.get(i), result);
+            //System.out.println(arabicValue + ": " + result);
         }
     }
 
     @Test
-    void return_roman_numeral_for_range_to_1000_by_tens() {
+    void return_roman_numeral_from_10_to_1000_by_tens() {
         List<String> expected = Arrays.asList(
                 "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC", "C",
                 "CX", "CXX", "CXXX", "CXL", "CL", "CLX", "CLXX", "CLXXX", "CXC", "CC",
@@ -44,13 +46,15 @@ class RomanNumeralUtilTest {
                 "CMX", "CMXX", "CMXXX", "CMXL", "CML", "CMLX", "CMLXX", "CMLXXX", "CMXC", "M"
         );
         for (int i = 0; i < expected.size(); i++) {
-            assertEquals(expected.get(i), RomanNumeralUtil.arabicToRoman((i + 1) * 10));
-            //System.out.println(((i + 1) * 10) + ": " + RomanNumeralUtil.arabicToRoman((i + 1) * 10));
+            int arabicValue = (i + 1) * 10;
+            String result = RomanNumeralUtil.arabicToRoman(arabicValue);
+            assertEquals(expected.get(i), result);
+            //System.out.println(arabicValue + ": " + result);
         }
     }
 
     @Test
-    void return_roman_numeral_for_1100_to_2000_by_tens() {
+    void return_roman_numeral_from_1010_to_2000_by_tens() {
         List<String> expected = Arrays.asList(
                 "MX", "MXX", "MXXX", "MXL", "ML", "MLX", "MLXX", "MLXXX", "MXC", "MC",
                 "MCX", "MCXX", "MCXXX", "MCXL", "MCL", "MCLX", "MCLXX", "MCLXXX", "MCXC", "MCC",
@@ -64,13 +68,15 @@ class RomanNumeralUtilTest {
                 "MCMX", "MCMXX", "MCMXXX", "MCMXL", "MCML", "MCMLX", "MCMLXX", "MCMLXXX", "MCMXC", "MM"
         );
         for (int i = 0; i < expected.size(); i++) {
-            assertEquals(expected.get(i), RomanNumeralUtil.arabicToRoman(1000 + (i + 1) * 10));
-            //System.out.println((1000 + (i + 1) * 10) + ": " + RomanNumeralUtil.arabicToRoman(1000 + (i + 1) * 10));
+            int arabicValue = 1000 + (i + 1) * 10;
+            String result = RomanNumeralUtil.arabicToRoman(arabicValue);
+            assertEquals(expected.get(i), result);
+            //System.out.println(arabicValue + ": " + result);
         }
     }
 
     @Test
-    void return_roman_numeral_for_2100_to_3000_by_tens() {
+    void return_roman_numeral_from_2010_to_3000_by_tens() {
         List<String> expected = Arrays.asList(
                 "MMX", "MMXX", "MMXXX", "MMXL", "MML", "MMLX", "MMLXX", "MMLXXX", "MMXC", "MMC",
                 "MMCX", "MMCXX", "MMCXXX", "MMCXL", "MMCL", "MMCLX", "MMCLXX", "MMCLXXX", "MMCXC", "MMCC",
@@ -84,13 +90,15 @@ class RomanNumeralUtilTest {
                 "MMCMX", "MMCMXX", "MMCMXXX", "MMCMXL", "MMCML", "MMCMLX", "MMCMLXX", "MMCMLXXX", "MMCMXC", "MMM"
         );
         for (int i = 0; i < expected.size(); i++) {
-            assertEquals(expected.get(i), RomanNumeralUtil.arabicToRoman(2000 + (i + 1) * 10));
-            //System.out.println((2000 + (i + 1) * 10) + ": " + RomanNumeralUtil.arabicToRoman(2000 + (i + 1) * 10));
+            int arabicValue = 2000 + (i + 1) * 10;
+            String result = RomanNumeralUtil.arabicToRoman(arabicValue);
+            assertEquals(expected.get(i), result);
+            //System.out.println(arabicValue + ": " + result);
         }
     }
 
     @Test
-    void return_roman_numeral_for_3100_to_3000_by_tens() {
+    void return_roman_numeral_from_3010_to_3990_by_tens() {
         List<String> expected = Arrays.asList(
                 "MMMX", "MMMXX", "MMMXXX", "MMMXL", "MMML", "MMMLX", "MMMLXX", "MMMLXXX", "MMMXC", "MMMC",
                 "MMMCX", "MMMCXX", "MMMCXXX", "MMMCXL", "MMMCL", "MMMCLX", "MMMCLXX", "MMMCLXXX", "MMMCXC", "MMMCC",
@@ -101,19 +109,21 @@ class RomanNumeralUtilTest {
                 "MMMDCX", "MMMDCXX", "MMMDCXXX", "MMMDCXL", "MMMDCL", "MMMDCLX", "MMMDCLXX", "MMMDCLXXX", "MMMDCXC", "MMMDCC",
                 "MMMDCCX", "MMMDCCXX", "MMMDCCXXX", "MMMDCCXL", "MMMDCCL", "MMMDCCLX", "MMMDCCLXX", "MMMDCCLXXX", "MMMDCCXC", "MMMDCCC",
                 "MMMDCCCX", "MMMDCCCXX", "MMMDCCCXXX", "MMMDCCCXL", "MMMDCCCL", "MMMDCCCLX", "MMMDCCCLXX", "MMMDCCCLXXX", "MMMDCCCXC", "MMMCM",
-                "MMMCMX", "MMMCMXX", "MMMCMXXX", "MMMCMXL", "MMMCML", "MMMCMLX", "MMMCMLXX", "MMMCMLXXX", "MMMCMXC", "M+"
+                "MMMCMX", "MMMCMXX", "MMMCMXXX", "MMMCMXL", "MMMCML", "MMMCMLX", "MMMCMLXX", "MMMCMLXXX", "MMMCMXC"
         );
         for (int i = 0; i < expected.size(); i++) {
-            assertEquals(expected.get(i), RomanNumeralUtil.arabicToRoman(3000 + (i + 1) * 10));
-            //System.out.println((3000 + (i + 1) * 10) + ": " + RomanNumeralUtil.arabicToRoman(3000 + (i + 1) * 10));
+            int arabicValue = 3000 + (i + 1) * 10;
+            String result = RomanNumeralUtil.arabicToRoman(arabicValue);
+            assertEquals(expected.get(i), result);
+            //System.out.println(arabicValue + ": " + result);
         }
     }
 
     @Test
-    void return_roman_numeral_for_special_cases() {
-        assertEquals("-0", RomanNumeralUtil.arabicToRoman(-100000));
-        assertEquals("-0", RomanNumeralUtil.arabicToRoman(-1));
-        assertEquals("0", RomanNumeralUtil.arabicToRoman(0));
+    void return_roman_numeral_for_edge_cases() {
+        assertThrows(IllegalArgumentException.class, () -> RomanNumeralUtil.arabicToRoman(Integer.MIN_VALUE));
+        assertThrows(IllegalArgumentException.class, () -> RomanNumeralUtil.arabicToRoman(-1));
+        assertThrows(IllegalArgumentException.class, () -> RomanNumeralUtil.arabicToRoman(0));
         assertEquals("MMMCMXCIII", RomanNumeralUtil.arabicToRoman(3993));
         assertEquals("MMMCMXCIV", RomanNumeralUtil.arabicToRoman(3994));
         assertEquals("MMMCMXCV", RomanNumeralUtil.arabicToRoman(3995));
@@ -121,5 +131,7 @@ class RomanNumeralUtilTest {
         assertEquals("MMMCMXCVII", RomanNumeralUtil.arabicToRoman(3997));
         assertEquals("MMMCMXCVIII", RomanNumeralUtil.arabicToRoman(3998));
         assertEquals("MMMCMXCIX", RomanNumeralUtil.arabicToRoman(3999));
+        assertThrows(IllegalArgumentException.class, () -> RomanNumeralUtil.arabicToRoman(4000));
+        assertThrows(IllegalArgumentException.class, () -> RomanNumeralUtil.arabicToRoman(Integer.MAX_VALUE));
     }
 }
