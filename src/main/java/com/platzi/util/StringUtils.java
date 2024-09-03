@@ -10,4 +10,8 @@ public class StringUtils {
         }
         return fullText.toString();
     }
+
+    public static boolean isEmpty(String str) {
+        return str == null || str.trim().isEmpty();
+    }
 }
