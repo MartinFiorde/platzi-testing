@@ -2,7 +2,8 @@ package com.platzi.movies.service;
 
 import com.platzi.movies.data.MovieRepository;
 import com.platzi.movies.model.Movie;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.Arrays;
@@ -10,7 +11,8 @@ import java.util.List;
 
 import static com.platzi.movies.model.Movie.Genre.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class MovieServiceTest {

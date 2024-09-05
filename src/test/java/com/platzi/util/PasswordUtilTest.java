@@ -2,8 +2,8 @@ package com.platzi.util;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static com.platzi.util.PasswordUtil.SecurityLevel.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PasswordUtilTest {
     @Test

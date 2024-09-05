@@ -12,23 +12,24 @@ import java.sql.SQLException;
 import java.util.List;
 
 import static com.platzi.movies.model.Movie.Genre.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MovieRepositoryIntegrationTest {
 
-    private MovieRepositoryImplJdbc movieRepository;
+    private MovieRepository movieRepository;
+
     @BeforeEach
     void setUp() throws SQLException {
+        // Create an in-memory H2 database with MySQL compatibility mode
         DriverManagerDataSource dataSource = new DriverManagerDataSource(
-                "jdbc:h2:mem:test;MODE=MYSQL",
-                "testuser",
-                "testpass"
-        );
-
-        ScriptUtils.executeSqlScript(dataSource.getConnection(), new ClassPathResource("sql-scripts/test-data.sql"));
+                "jdbc:h2:mem:test;MODE=MYSQL", "testuser", "testpass");
+        // Execute SQL script to set up initial test data in the database
+        ScriptUtils.executeSqlScript(
+                dataSource.getConnection(), new ClassPathResource("sql-scripts/test-data.sql"));
+        // Initialize JdbcTemplate with the configured data source. JdbcTemplate simplifies DB interactions by handling SQL execution and result set processing, providing a higher-level API for performing common DB operations such as querying, updating, and transaction management.
         JdbcTemplate template = new JdbcTemplate(dataSource);
+        // Create an instance of MovieRepositoryImplJdbc using the JdbcTemplate to interact with the DB
         movieRepository = new MovieRepositoryImplJdbc(template);
-
     }
 
     @Test
