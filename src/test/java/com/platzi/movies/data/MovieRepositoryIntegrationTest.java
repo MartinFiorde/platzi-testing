@@ -1,6 +1,7 @@
 package com.platzi.movies.data;
 
 import com.platzi.movies.model.Movie;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
@@ -8,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -16,12 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MovieRepositoryIntegrationTest {
 
+    private DataSource dataSource;
     private MovieRepository movieRepository;
 
     @BeforeEach
     void setUp() throws SQLException {
         // Create an in-memory H2 database with MySQL compatibility mode
-        DriverManagerDataSource dataSource = new DriverManagerDataSource(
+        dataSource = new DriverManagerDataSource(
                 "jdbc:h2:mem:test;MODE=MYSQL", "testuser", "testpass");
         // Execute SQL script to set up initial test data in the database
         ScriptUtils.executeSqlScript(
@@ -65,5 +68,12 @@ class MovieRepositoryIntegrationTest {
         Movie expected = new Movie(1, "Dark Knight", 152, THRILLER);
         Movie result = movieRepository.saveOrUpdate(new Movie(1, "Dark Knight", 152, THRILLER));
         assertEquals(expected, result);
+    }
+
+    @AfterEach
+    void tearDown() throws SQLException {
+        // Limpiar todas las tablas después de cada test
+        ScriptUtils.executeSqlScript(
+                dataSource.getConnection(), new ClassPathResource("sql-scripts/clean_db.sql"));
     }
 }
