@@ -84,4 +84,12 @@ class MovieServiceTest {
         List<Movie> result = service.findMoviesByExactDirector("Director 1000");
         assertThat(result).isEmpty();
     }
+
+    @Test
+    void return_movies_matching_search_template() {
+        Movie template = new Movie(null, null, 150, ACTION);
+        List<Movie> moviesInput = service.findMoviesByTemplate(template);
+        List<Integer> result = moviesInput.stream().map(Movie::getId).toList();
+        assertThat(result).containsExactlyInAnyOrderElementsOf(List.of(7,8));
+    }
 }

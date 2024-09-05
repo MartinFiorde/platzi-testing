@@ -8,7 +8,7 @@ public class Movie {
     private Integer id;
     private final String name;
     private final String director;
-    private final int minutes;
+    private final Integer minutes;
     private final Genre genre;
 
     public Movie(String name, String director, int minutes, Genre genre) {
@@ -18,7 +18,7 @@ public class Movie {
         this.genre = genre;
     }
 
-    public Movie(Integer id, String name, String director, int minutes, Genre genre) {
+    public Movie(Integer id, String name, String director, Integer minutes, Genre genre) {
         this.id = id;
         this.name = name;
         this.director = director;
@@ -38,7 +38,7 @@ public class Movie {
         return director;
     }
 
-    public int getMinutes() {
+    public Integer getMinutes() {
         return minutes;
     }
 

@@ -46,4 +46,17 @@ public class MovieService {
                 .filter(movie -> movie.getDirector().equalsIgnoreCase(director))
                 .toList();
     }
+
+    public List<Movie> findMoviesByTemplate(Movie template) {
+        return movieRepository.findAll().stream()
+                .filter(movie -> template.getName() == null
+                        || movie.getName().toLowerCase().contains(template.getName().toLowerCase()))
+                .filter(movie -> template.getDirector() == null
+                        || movie.getDirector().equalsIgnoreCase(template.getDirector()))
+                .filter(movie -> template.getMinutes() == null
+                        || movie.getMinutes() <= template.getMinutes())
+                .filter(movie -> template.getGenre() == null
+                        || movie.getGenre() == template.getGenre())
+                .toList();
+    }
 }
