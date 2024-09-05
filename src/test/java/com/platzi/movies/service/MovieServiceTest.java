@@ -6,7 +6,6 @@ import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import static com.platzi.movies.model.Movie.Genre.*;
@@ -36,21 +35,21 @@ class MovieServiceTest {
 
     @Test
     void return_movies_id_by_genre() {
-        Collection<Movie> moviesInput = service.findMoviesByGenre(COMEDY);
+        List<Movie> moviesInput = service.findMoviesByGenre(COMEDY);
         List<Integer> result = moviesInput.stream().map(Movie::getId).toList();
         assertThat(result).containsExactlyInAnyOrderElementsOf(List.of(6, 3));
     }
 
     @Test
     void return_movies_id_by_max_or_equal_length() {
-        Collection<Movie> moviesInput = service.findMoviesByMaxOrEqualLength(119);
+        List<Movie> moviesInput = service.findMoviesByMaxOrEqualLength(119);
         List<Integer> result = moviesInput.stream().map(Movie::getId).toList();
         assertThat(result).containsExactlyInAnyOrderElementsOf(List.of(2, 3, 4, 5, 6, 8));
     }
 
     @Test
     void return_movies_id_by_partial_name() {
-        Collection<Movie> moviesInput = service.findMoviesByPartialName("er");
+        List<Movie> moviesInput = service.findMoviesByPartialName("er");
         List<Integer> result = moviesInput.stream().map(Movie::getId).toList();
         assertThat(result).containsExactlyInAnyOrderElementsOf(List.of(3, 4));
     }

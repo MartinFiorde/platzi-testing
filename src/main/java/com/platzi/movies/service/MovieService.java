@@ -3,7 +3,6 @@ package com.platzi.movies.service;
 import com.platzi.movies.data.MovieRepository;
 import com.platzi.movies.model.Movie;
 
-import java.util.Collection;
 import java.util.List;
 
 public class MovieService {
@@ -14,19 +13,19 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-    public Collection<Movie> findMoviesByGenre(Movie.Genre genre) {
+    public List<Movie> findMoviesByGenre(Movie.Genre genre) {
         return movieRepository.findAll().stream()
                 .filter(movie -> movie.getGenre() == genre)
                 .toList();
     }
 
-    public Collection<Movie> findMoviesByMaxOrEqualLength(int length) {
+    public List<Movie> findMoviesByMaxOrEqualLength(int length) {
         return movieRepository.findAll().stream()
                 .filter(movie -> movie.getMinutes() <= length)
                 .toList();
     }
 
-    public Collection<Movie> findMoviesByPartialName(String partialName) {
+    public List<Movie> findMoviesByPartialName(String partialName) {
         return movieRepository.findAll().stream()
                 .filter(movie -> movie.getName().toLowerCase().contains(partialName.toLowerCase()))
                 .toList();
