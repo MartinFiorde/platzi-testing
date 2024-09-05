@@ -48,6 +48,12 @@ public class MovieService {
     }
 
     public List<Movie> findMoviesByTemplate(Movie template) {
+        if (template.getId() != null) {
+            Movie asd = movieRepository.findById(template.getId());
+            System.out.println(asd);
+            return List.of(movieRepository.findById(template.getId()));
+        }
+        if (template.getMinutes() != null && template.getMinutes() < 0) throw new IllegalArgumentException("Minutes cannot be negative");
         return movieRepository.findAll().stream()
                 .filter(movie -> template.getName() == null
                         || movie.getName().toLowerCase().contains(template.getName().toLowerCase()))

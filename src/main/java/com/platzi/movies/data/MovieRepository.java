@@ -5,7 +5,7 @@ import com.platzi.movies.model.Movie;
 import java.util.List;
 
 public interface MovieRepository {
-    Movie findById(long id);
+    Movie findById(Integer id);
 
     List<Movie> findAll();
 

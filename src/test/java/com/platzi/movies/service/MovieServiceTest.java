@@ -16,12 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class MovieServiceTest {
-
+    private MovieRepository mockedRepository;
     private MovieService service;
 
     @BeforeEach
     void setUp() {
-        MovieRepository mockedRepository = Mockito.mock(MovieRepository.class);
+        mockedRepository = Mockito.mock(MovieRepository.class);
         Mockito.when(mockedRepository.findAll()).thenReturn(Arrays.asList(
                 new Movie(1, "Dark Knight", "Director 1", 152, ACTION),
                 new Movie(2, "Memento", "Director 2", 113, THRILLER),
@@ -90,6 +90,22 @@ class MovieServiceTest {
         Movie template = new Movie(null, null, 150, ACTION);
         List<Movie> moviesInput = service.findMoviesByTemplate(template);
         List<Integer> result = moviesInput.stream().map(Movie::getId).toList();
-        assertThat(result).containsExactlyInAnyOrderElementsOf(List.of(7,8));
+        assertThat(result).containsExactlyInAnyOrderElementsOf(List.of(7, 8));
+    }
+
+    @Test
+    void return_movies_matching_search_template_with_id() {
+        Mockito.when(mockedRepository.findById(3)).thenReturn(
+                new Movie(3, "There's Something About Mary", "Director 3", 119, COMEDY));
+        Movie template = new Movie(3, null, null, 150, ACTION);
+        List<Movie> moviesInput = service.findMoviesByTemplate(template);
+        List<Integer> result = moviesInput.stream().map(Movie::getId).toList();
+        assertThat(result).containsExactlyInAnyOrderElementsOf(List.of(3));
+    }
+
+    @Test
+    void return_movies_matching_search_template_with_negative_minutes() {
+        Movie template = new Movie(null, null, -150, ACTION);
+        assertThrows(IllegalArgumentException.class, () -> service.findMoviesByTemplate(template));
     }
 }
