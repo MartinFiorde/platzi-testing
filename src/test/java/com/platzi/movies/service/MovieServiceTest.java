@@ -23,14 +23,14 @@ class MovieServiceTest {
     void setUp() {
         MovieRepository mockedRepository = Mockito.mock(MovieRepository.class);
         Mockito.when(mockedRepository.findAll()).thenReturn(Arrays.asList(
-                new Movie(1, "Dark Knight", 152, ACTION),
-                new Movie(2, "Memento", 113, THRILLER),
-                new Movie(3, "There's Something About Mary", 119, COMEDY),
-                new Movie(4, "Super 8", 112, THRILLER),
-                new Movie(5, "Scream", 111, HORROR),
-                new Movie(6, "Home Alone", 103, COMEDY),
-                new Movie(7, "Matrix", 136, ACTION),
-                new Movie(8, "Matrix", 15, ACTION)
+                new Movie(1, "Dark Knight", "Director 1", 152, ACTION),
+                new Movie(2, "Memento", "Director 2", 113, THRILLER),
+                new Movie(3, "There's Something About Mary", "Director 3", 119, COMEDY),
+                new Movie(4, "Super 8", "Director 4", 112, THRILLER),
+                new Movie(5, "Scream", "Director 4", 111, HORROR),
+                new Movie(6, "Home Alone", "Director 4", 103, COMEDY),
+                new Movie(7, "Matrix", "Director 5", 136, ACTION),
+                new Movie(8, "Matrix", "Director 6", 136, ACTION)
         ));
         service = new MovieService(mockedRepository);
     }
@@ -46,7 +46,7 @@ class MovieServiceTest {
     void return_movies_id_by_max_or_equal_length() {
         List<Movie> moviesInput = service.findMoviesByMaxOrEqualLength(119);
         List<Integer> result = moviesInput.stream().map(Movie::getId).toList();
-        assertThat(result).containsExactlyInAnyOrderElementsOf(List.of(2, 3, 4, 5, 6, 8));
+        assertThat(result).containsExactlyInAnyOrderElementsOf(List.of(2, 3, 4, 5, 6));
     }
 
     @Test
@@ -72,4 +72,16 @@ class MovieServiceTest {
         assertThrows(IllegalArgumentException.class, () -> service.findMoviesByExactName("Matrix"));
     }
 
+    @Test
+    void return_movies_id_by_exact_director() {
+        List<Movie> moviesInput = service.findMoviesByExactDirector("Director 4");
+        List<Integer> result = moviesInput.stream().map(Movie::getId).toList();
+        assertThat(result).containsExactlyInAnyOrderElementsOf(List.of(4, 5, 6));
+    }
+
+    @Test
+    void return_movies_id_by_exact_director_is_empty() {
+        List<Movie> result = service.findMoviesByExactDirector("Director 1000");
+        assertThat(result).isEmpty();
+    }
 }

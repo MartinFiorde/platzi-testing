@@ -33,18 +33,18 @@ public class MovieRepositoryImplJdbc implements MovieRepository {
 
     @Override
     public Movie saveOrUpdate(Movie movie) {
-        Movie movieSaved = new Movie(movie.getId(), movie.getName(), movie.getMinutes(), movie.getGenre());
+        Movie movieSaved = new Movie(movie.getId(), movie.getName(), movie.getDirector(), movie.getMinutes(), movie.getGenre());
         if (movieSaved.getId() == null || movieSaved.getId() == 0 || findById(movieSaved.getId()) == null) {
-            String insertSql = "INSERT INTO movies (name, minutes, genre) VALUES (?, ?, ?);";
-            //jdbcTemplate.update(insertSql, movieSaved.getName(), movieSaved.getMinutes(), movieSaved.getGenre().name());
+            String insertSql = "INSERT INTO movies (name, director, minutes, genre) VALUES (?, ?, ?, ?);";
             KeyHolder keyHolder = new GeneratedKeyHolder();
 
             // Ejecutar el INSERT y capturar la clave generada
             jdbcTemplate.update(connection -> {
                 PreparedStatement ps = connection.prepareStatement(insertSql, new String[]{"id"});
                 ps.setString(1, movieSaved.getName());
-                ps.setInt(2, movieSaved.getMinutes());
-                ps.setString(3, movieSaved.getGenre().name());
+                ps.setString(2, movieSaved.getDirector());
+                ps.setInt(3, movieSaved.getMinutes());
+                ps.setString(4, movieSaved.getGenre().name());
                 return ps;
             }, keyHolder);
 
@@ -53,8 +53,14 @@ public class MovieRepositoryImplJdbc implements MovieRepository {
             movieSaved.setId(newId);
 
         } else {
-            String updateSql = "UPDATE movies SET name = ?, minutes = ?, genre = ? WHERE id = ?;";
-            jdbcTemplate.update(updateSql, movieSaved.getName(), movieSaved.getMinutes(), movieSaved.getGenre().name(), movieSaved.getId());
+            String updateSql = "UPDATE movies SET name = ?, director = ?, minutes = ?, genre = ? WHERE id = ?;";
+            jdbcTemplate.update(updateSql,
+                    movieSaved.getName(),
+                    movieSaved.getDirector(),
+                    movieSaved.getMinutes(),
+                    movieSaved.getGenre().name(),
+                    movieSaved.getId()
+            );
         }
         return movieSaved;
     }
@@ -66,6 +72,7 @@ public class MovieRepositoryImplJdbc implements MovieRepository {
                 return new Movie(
                         rs.getInt("id"),
                         rs.getString("name"),
+                        rs.getString("director"),
                         rs.getInt("minutes"),
                         Movie.Genre.valueOf(rs.getString("genre"))
                 );
@@ -73,3 +80,5 @@ public class MovieRepositoryImplJdbc implements MovieRepository {
         };
     }
 }
+
+// movie.getDirector(),

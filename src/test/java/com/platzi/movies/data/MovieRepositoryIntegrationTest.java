@@ -43,30 +43,30 @@ class MovieRepositoryIntegrationTest {
 
     private static List<Movie> getExpected() {
         return List.of(
-                new Movie(1, "Dark Knight", 152, ACTION),
-                new Movie(2, "Memento", 113, THRILLER),
-                new Movie(3, "Matrix", 136, ACTION)
+                new Movie(1, "Dark Knight", "Director 1", 152, ACTION),
+                new Movie(2, "Memento", "Director 2", 113, THRILLER),
+                new Movie(3, "Matrix", "Director 3", 136, ACTION)
         );
     }
 
     @Test
     void load_movie_by_id() {
-        Movie expected = new Movie(1, "Dark Knight", 152, ACTION);
+        Movie expected = new Movie(1, "Dark Knight", "Director 1", 152, ACTION);
         Movie result = movieRepository.findById(1);
         assertEquals(expected, result);
     }
 
     @Test
     void save_new_movie() {
-        Movie result = movieRepository.saveOrUpdate(new Movie("Pepito", 89, COMEDY));
-        Movie expected = new Movie(4, "Pepito", 89, COMEDY);
+        Movie result = movieRepository.saveOrUpdate(new Movie("Pepito", "Director 4", 89, COMEDY));
+        Movie expected = new Movie(4, "Pepito", "Director 4", 89, COMEDY);
         assertEquals(expected, result);
     }
 
     @Test
     void update_existing_movie() {
-        Movie expected = new Movie(1, "Dark Knight", 152, THRILLER);
-        Movie result = movieRepository.saveOrUpdate(new Movie(1, "Dark Knight", 152, THRILLER));
+        Movie expected = new Movie(1, "Dark Knight", "Director 1", 152, THRILLER);
+        Movie result = movieRepository.saveOrUpdate(new Movie(1, "Dark Knight", "Director 1", 152, THRILLER));
         assertEquals(expected, result);
     }
 

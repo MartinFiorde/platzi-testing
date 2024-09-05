@@ -40,4 +40,10 @@ public class MovieService {
         if (items.size() > 1) throw new IllegalArgumentException("Multiple movies found with the name " + exactName);
         return items.getFirst();
     }
+
+    public List<Movie> findMoviesByExactDirector(String director) {
+        return movieRepository.findAll().stream()
+                .filter(movie -> movie.getDirector().equalsIgnoreCase(director))
+                .toList();
+    }
 }
