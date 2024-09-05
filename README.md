@@ -167,3 +167,5 @@ Por el momento, nuestras pruebas están cargando varias veces la información de
 * [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/)
 * [JUnit 5 Tutorial](https://www.vogella.com/tutorials/JUnit/article.html)
 * [Mockito](https://site.mockito.org/)
+* [H2 Database](http://www.h2database.com/html/main.html)
+* [Spring JdbcTemplate](https://docs.spring.io/spring-framework/reference/data-access/jdbc/core.html#jdbc-JdbcTemplate)
